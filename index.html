@@ -1,0 +1,409 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta />
+    <meta />
+    <meta />
+    <link rel="stylesheet" type="text/css" href="../../style/origo.css" media="all" />
+    <meta name="author" content="Lei Li" />
+    <title>DL</title>
+  </head>
+  <body>
+    <h1 align="center">CMU 11737 Multilingual Natural Language Processing<br />
+    </h1>
+    <h2>Course Description </h2>
+    <p>11737 Multilingual Natural Language Processing is an advanced graduate-level course on natural language processing techniques applicable to many languages. Students who take this course should be able to develop linguistically motivated solutions to core and applied NLP tasks for any language. This includes understanding and mitigating the difficulties posed by lack of data in low-resourced languages or language varieties, and the necessity to model particular properties of the language of interest such as complex morphology or syntax. The course will introduce modeling solutions to these issues such as multilingual or cross-lingual methods, linguistically informed NLP models, and methods for effectively bootstrapping systems with limited data or human intervention. The project work will involve building an end-to-end NLP pipeline in a language you don’t know. </p>
+    <h2>Instructor</h2>
+    <p><a href="https://www.cs.cmu.edu/%7Eleili">Lei Li</a> 
+      (Office Hour:  GHC 6403, book a slot <a href="">here</a>)
+    </p>
+    <h2>Teaching Assistant</h2>
+    <ul>
+      <li>Simran Khanuja (Office Hour: xxx)</li>
+      <li> (Office Hour: xxx) </li>
+      <li> (Office Hour: xxx) </li>
+    </ul>
+    <h2>Time and Location</h2>
+    <p> Tuesday and Thursday, 2-3:20pm, DH 1212</p>
+
+    <h2>Prerequisites</h2>
+    <p> NLP (11411 or 11611 or 11711), deep learning (11685 or 11785), and familiar with PyTorch.
+    </p>
+    <h2>Homework Submission &amp; Grading</h2>
+    <ul>
+      <li>Please submit your homework at canvas.
+      </li>
+    </ul>
+    <h2>Discussion Forum</h2>
+    <p>We will use Ed platform. <a href="https://edstem.org/us/join/qbssDd">sign up here</a>
+    </p>
+    <h2>Policy</h2>
+    <p>Please read the following <a href="course_policy.html">Link</a>
+      carefully!<br />
+    </p>
+    <h2>Syllabus</h2>
+    <table width="100%" border="0">
+      <tbody>
+        <tr>
+          <td>#<br />
+          </td>
+          <td>Date<br />
+          </td>
+          <td>Topic<br />
+          </td>
+          <td>Reading<br />
+          </td>
+          <td>Homework<br />
+          </td>
+        </tr>
+        <tr>
+          <td>1<br />
+          </td>
+          <td>1/9<br />
+          </td>
+          <td> <a href="01-intro.pdf">Introduction </a><br />
+          </td>
+          <td>Chap 1, 2 of D2L<br />
+          </td>
+          <td><a href="cs190I_dl23w_hw1.pdf">HW1 </a><br />
+          </td>
+        </tr>
+        <tr>
+          <td>2<br />
+          </td>
+          <td>1/11<br />
+          </td>
+          <td><a href="02-linear-model.pdf"> Linear Models, Vector Calculus </a><br />
+          </td>
+          <td>Chap 3 of D2LC<br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>1/13</td>
+          <td>Recitation: <a href="recitation_week1.pdf">recitation_week1</a></td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>1/16</td>
+          <td>holiday. no class</td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>        
+        <tr>
+          <td>3<br />
+          </td>
+          <td>1/18<br />
+          </td>
+          <td><a href="03-logistic-regression.pdf">Logistic Regression, Cross
+              Entropy</a><br />
+          </td>
+          <td>Chap 4 of D2L<br />
+          </td>
+          <td><a href="mp1/cs190I_dl23w_mp1.pdf">MP1</a> out<br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>1/20</td>
+          <td>Recitation: <a href="recitation_week2.pdf">recitation_week2</a></td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>        
+        <tr>
+          <td>4<br />
+          </td>
+          <td>1/23<br />
+          </td>
+          <td><a href="04-ffn.pdf">Feedforward Network, Empirical Risk
+              Minimization, Gradient Descent</a><br />
+          </td>
+          <td>Chap 5 of D2L<br />
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>5<br />
+          </td>
+          <td>1/25<br />
+          </td>
+          <td><a href="05-learning_ffn.pdf">Learning FFN</a><br />
+          </td>
+          <td>Chap 5 of D2L<br />
+          </td>
+          <td>HW1 due, <a href="cs190I_dl23w_hw2.pdf">HW2</a> out<br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>1/27</td>
+          <td>Recitation: <a href="recitation_week3.ipynb">recitation_week3</a></td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td>6<br />
+          </td>
+          <td>1/30<br />
+          </td>
+          <td><a href="06-evaluation.pdf">Model Evaluation</a></td>
+          <td>Chap 6 of D2L<br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td>7<br />
+          </td>
+          <td>2/1<br />
+          </td>
+          <td><a href="07-regularization.pdf"> Regularization and other training techniques </a> </td>
+          <td>Chap 6 of D2L<br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>2/3</td>
+          <td>Recitation: <a href="recitation_week4.pdf">recitation_week4</a></td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>        
+        <tr>
+          <td>8<br />
+          </td>
+          <td>2/6<br />
+          </td>
+          <td><a href="08-cnn.pdf"> Convolutional Neural Networks</a> </td>
+          <td>Chap 7 of D2L<br />
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>9<br />
+          </td>
+          <td>2/8<br />
+          </td>
+          <td><a href="08-cnn.pdf">  Convolutional Neural Networks  </a><br />
+          </td>
+          <td>Chap 7 of D2L<br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>2/10</td>
+          <td>Recitation:<a href="recitation_week5.pdf">recitation_week5</a></td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td>10<br />
+          </td>
+          <td>2/13<br />
+          </td>
+          <td><a href="09-resnet.pdf"> ResNet and other CNN variants  </a><br />
+          </td>
+          <td>Chap 8 of D2L<br />
+          </td>
+          <td>HW2 Due, <a href="cs190I_dl23w_hw3.pdf">HW3</a> out<br />
+          </td>
+        </tr>
+        <tr>
+          <td>11<br />
+          </td>
+          <td>2/15<br />
+          </td>
+          <td> <a href="10-optimization.pdf"> Optimization for ML </a><br />
+          </td>
+          <td>Chap 12 of D2L<br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>2/17</td>
+          <td>Recitation:<a href="recitation_week6.pdf">recitation_week6</a></td>
+          <td><br />
+          </td>
+          <td>MP1 Due, <a href="mp2/cs190I_dl23w_mp2.pdf"> MP2</a> out<br />
+          </td>
+        </tr>        
+        <tr>
+          <td><br />
+          </td>
+          <td>2/20<br />
+          </td>
+          <td>holiday. no class<br />
+          </td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>        
+        <tr>
+          <td>12<br />
+          </td>
+          <td>2/22<br />
+          </td>
+          <td> <a href="11-detection.pdf"> Object Detection
+            </a><br />
+          </td>
+          <td>Chap 14 of D2L<br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>2/24</td>
+          <td>Recitation: <a href="recitation_week7.pdf">recitation_week7</a></td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>        
+        <tr>
+          <td>13<br />
+          </td>
+          <td>2/27<br />
+          </td>
+          <td> <a href="12-recurrent_neural_net.pdf"> Recurrent Neural Networks </a></td>
+          <td>Chap 9 of D2L<br />
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>14<br />
+          </td>
+          <td>3/1<br />
+          </td>
+          <td><a href="13-seq2seq_Transformer.pdf"> Sequence-to-Sequence Learning and Transformer </a> </td>
+          <td>Chap 10, 11 of D2L<br />
+          </td>
+          <td>HW3 Due<br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>3/3</td>
+          <td>Recitation:<a href="recitation_week8.ipynb">recitation_week8</a></td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>        
+        <tr>
+          <td>15<br />
+          </td>
+          <td>3/6<br />
+          </td>
+          <td><a href="14-pretrained_langauge_models.pdf">Pretrained Language Models </a> </td>
+          <td>Chap 15.8-15.10, Chap 16.6, 16.9 of D2L, <a href="https://arxiv.org/abs/1810.04805">BERT</a>, <a href="https://arxiv.org/abs/2005.14165">GPT3</a>, <a href="https://arxiv.org/abs/2203.02155">InstructGPT</a> <br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td>16<br />
+          </td>
+          <td>3/8<br /></td>
+          <td><a href="15-GNN.pdf">Graph Neural Networks</a> </td>
+          <td>
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>3/10</td>
+          <td>Recitation: <a href="https://nlp.seas.harvard.edu/2018/04/03/attention.html">Annotated Transformer</a> </td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>        
+        <tr>
+          <td>17<br />
+          </td>
+          <td>3/13<br />
+          </td>
+          <td><a href="16-VAE.pdf">Variational Auto-Encoder</a> </td>
+          <td><a href="http://arxiv.org/abs/1312.6114">VAE</a>, <a href="https://aclanthology.org/K16-1002">Sentence VAE</a> <br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td>18<br />
+          </td>
+          <td>3/15<br />
+          </td>
+          <td>Guest Lecture on Industrial Application of Deep Learning</td>
+          <td> <br />
+          </td>
+          <td>MP2 Due<br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>3/17</td>
+          <td>Recitation: Final Prep</td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>        
+        <tr>
+          <td><br />
+          </td>
+          <td>3/xx<br />
+          </td>
+          <td>Final Exam<br />
+          </td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p><br />
+    </p>
+  </body>
+</html>
+
+
+<!-- Graph Neural Network 
+<a href="http://arxiv.org/abs/1609.02907">GCN</a>, <a href="https://arxiv.org/pdf/1704.01212.pdf">MPNN</a> -->
