@@ -10,15 +10,16 @@
     <title>DL</title>
   </head>
   <body>
-    <h1 align="center">CMU 11737 Multilingual Natural Language Processing<br />
+    <h1 align="center">CS 11-737: Multilingual Natural Language Processing<br />
     </h1>
     <h2>Course Description </h2>
-    <p>11737 Multilingual Natural Language Processing is an advanced graduate-level course on natural language processing techniques applicable to many languages. Students who take this course should be able to develop linguistically motivated solutions to core and applied NLP tasks for any language. This includes understanding and mitigating the difficulties posed by lack of data in low-resourced languages or language varieties, and the necessity to model particular properties of the language of interest such as complex morphology or syntax. The course will introduce modeling solutions to these issues such as multilingual or cross-lingual methods, linguistically informed NLP models, and methods for effectively bootstrapping systems with limited data or human intervention. The project work will involve building an end-to-end NLP pipeline in a language you don’t know. </p>
+    <p>CS 11-737 is an advanced graduate-level course on natural language processing techniques applicable to many languages. Students who take this course should be able to develop linguistically motivated solutions to core and applied NLP tasks for any language. This includes understanding and mitigating the difficulties posed by lack of data in low-resourced languages or language varieties, and the necessity to model particular properties of the language of interest such as complex morphology or syntax. The course will introduce modeling solutions to these issues such as multilingual or cross-lingual methods, linguistically informed NLP models, and methods for effectively bootstrapping systems with limited data or human intervention. The project work will involve building an end-to-end NLP pipeline in a language you don’t know. </p>
     <h2>Instructor</h2>
     <p><a href="https://www.cs.cmu.edu/%7Eleili">Lei Li</a> 
       (Office Hour:  GHC 6403, book a slot <a href="">here</a>)
     </p>
-    <h2>Teaching Assistant</h2>
+    <h2>Teaching Assistants </h2>
+    TA Mailing list: <tt>cs11-737-fa2023-tas</tt><tt>@</tt><tt>cs.cmu.edu</tt>
     <ul>
       <li>Simran Khanuja (Office Hour: xxx)</li>
       <li> (Office Hour: xxx) </li>
@@ -28,18 +29,36 @@
     <p> Tuesday and Thursday, 2-3:20pm, DH 1212</p>
 
     <h2>Prerequisites</h2>
-    <p> NLP (11411 or 11611 or 11711), deep learning (11685 or 11785), and familiar with PyTorch.
+    <p> You must have taken a NLP (11-411 or 11-611 or 11-711) and Deep Learning (11-685 or 11-785) course previously. The assignments for the class will be done by creating neural network models, and examples will be provided using PyTorch. If you are not familiar with PyTorch, we suggest you attempt to familiarize yourself using online tutorials (for example Deep Learning for NLP with PyTorch) before starting the class.
+    </p>
+    <h2>Class Format</h2>
+    <p> For each class there will be:
+      <ul>
+        <li><i>Reading:</i> Most classes will have associated reading material that we recommend you read before the class to familiarize yourself with the topic.
+        </li>
+        <li><i>Lecture:</i> The first part of the class with feature a lecture to overview the topic of the day, in which you can ask questions to clarify about any of the material.
+        </li>
+        <li><i>Language in 10:</i> Groups in the class will make a 10-minute presentation of one of the languages of the world.
+        </li>
+        <li><i>Discussion:</i> There will be an open-ended discussion in which we will split into small groups and discuss a question regarding the class.
+        </li>
+      </ul> 
     </p>
     <h2>Homework Submission &amp; Grading</h2>
-    <ul>
-      <li>Please submit your homework at canvas.
+        Please submit your homework on canvas. The assignments will be given a grade of A+ (100), A (96), A- (92), B+ (88), B (85), B- (82), or below. The final grades will be determined based on the weighted average of discussion participation, assignments, and project. Cutoffs for final grades will be approximately 97+ A+, 93+ A, 90+ A-, 87+ B+, 83+ B, 80+ B-, etc., although we reserve some flexibility to change these thresholds slightly.
+        <ul>
+        <li><i>Participation:</i> Worth 15% of the grade. Your lowest 3 participation grades will be dropped.</li>
+        <li><i>Assignments:</i> There will be 4 assignments (the final one being the project), worth respectively 15%, 20%, 20%, 30% of the grade.</li>
+        </ul>
+        The details of the assignments are elaborated on the <a href="assignments.html">assignments page</a>.
+        </p>
       </li>
     </ul>
     <h2>Discussion Forum</h2>
-    <p>We will use Ed platform. <a href="https://edstem.org/us/join/qbssDd">sign up here</a>
+    <p>We will use the Ed platform for discussions <a href="https://edstem.org/us/join/qbssDd">(sign up here)</a>, but emailing the TA mailing list and coming to office hours are also encouraged.
     </p>
     <h2>Policy</h2>
-    <p>Please read the following <a href="course_policy.html">Link</a>
+    <p>Please read the following <a href="course_policy.html">link</a>
       carefully!<br />
     </p>
     <h2>Syllabus</h2>
@@ -62,7 +81,7 @@
           </td>
           <td>8/29<br />
           </td>
-          <td> <a href="01-intro.pdf">Introduction </a><br />
+          <td> <a href="/class/schedule/introduction.html">Class Introduction </a><br />
           </td>
           <td><br />
           </td>
@@ -72,87 +91,42 @@
         <tr>
           <td>2<br />
           </td>
-          <td>1/11<br />
+          <td>8/31<br />
           </td>
-          <td><a href="02-linear-model.pdf"> Linear Models, Vector Calculus </a><br />
+          <td><a href="/class/schedule/sequencelabeling.html">Sequence Labeling </a><br />
           </td>
-          <td>Chap 3 of D2LC<br />
-          </td>
-          <td><br />
-          </td>
-        </tr>
-        <tr>
-          <td><br />
-          </td>
-          <td>1/13</td>
-          <td>Recitation: <a href="recitation_week1.pdf">recitation_week1</a></td>
           <td><br />
           </td>
           <td><br />
           </td>
         </tr>
-        <tr>
-          <td><br />
-          </td>
-          <td>1/16</td>
-          <td>holiday. no class</td>
-          <td><br />
-          </td>
-          <td><br />
-          </td>
-        </tr>        
         <tr>
           <td>3<br />
           </td>
-          <td>1/18<br />
+          <td>9/5</td>
+          <td><a href="/class/schedule/typology.html">Typology: The Space of Languages </a></td>
+          <td><br />
           </td>
-          <td><a href="03-logistic-regression.pdf">Logistic Regression, Cross
-              Entropy</a><br />
-          </td>
-          <td>Chap 4 of D2L<br />
-          </td>
-          <td><a href="mp1/cs190I_dl23w_mp1.pdf">MP1</a> out<br />
+          <td><br />
           </td>
         </tr>
         <tr>
-          <td><br />
+          <td>4<br />
           </td>
-          <td>1/20</td>
-          <td>Recitation: <a href="recitation_week2.pdf">recitation_week2</a></td>
+          <td>9/7</td>
+          <td><a href="/class/schedule/translation.html">Translation and Translation Data </a></td>
           <td><br />
           </td>
           <td><br />
           </td>
         </tr>        
         <tr>
-          <td>4<br />
-          </td>
-          <td>1/23<br />
-          </td>
-          <td><a href="04-ffn.pdf">Feedforward Network, Empirical Risk
-              Minimization, Gradient Descent</a><br />
-          </td>
-          <td>Chap 5 of D2L<br />
-          </td>
-          <td></td>
-        </tr>
-        <tr>
           <td>5<br />
           </td>
-          <td>1/25<br />
+          <td>9/12<br />
           </td>
-          <td><a href="05-learning_ffn.pdf">Learning FFN</a><br />
+          <td><a href="/class/schedule/mtmodels.html">Translation Models</a><br />
           </td>
-          <td>Chap 5 of D2L<br />
-          </td>
-          <td>HW1 due, <a href="cs190I_dl23w_hw2.pdf">HW2</a> out<br />
-          </td>
-        </tr>
-        <tr>
-          <td><br />
-          </td>
-          <td>1/27</td>
-          <td>Recitation: <a href="recitation_week3.ipynb">recitation_week3</a></td>
           <td><br />
           </td>
           <td><br />
@@ -161,62 +135,41 @@
         <tr>
           <td>6<br />
           </td>
-          <td>1/30<br />
-          </td>
-          <td><a href="06-evaluation.pdf">Model Evaluation</a></td>
-          <td>Chap 6 of D2L<br />
-          </td>
-          <td><br />
-          </td>
-        </tr>
-        <tr>
-          <td>7<br />
-          </td>
-          <td>2/1<br />
-          </td>
-          <td><a href="07-regularization.pdf"> Regularization and other training techniques </a> </td>
-          <td>Chap 6 of D2L<br />
-          </td>
-          <td><br />
-          </td>
-        </tr>
-        <tr>
-          <td><br />
-          </td>
-          <td>2/3</td>
-          <td>Recitation: <a href="recitation_week4.pdf">recitation_week4</a></td>
+          <td>9/14</td>
+          <td><a href="/class/schedule/mtdataaug.html">Data-driven Strategies for NMT</a></td>
           <td><br />
           </td>
           <td><br />
           </td>
         </tr>        
         <tr>
-          <td>8<br />
+          <td>7<br />
           </td>
-          <td>2/6<br />
+          <td>9/19<br />
           </td>
-          <td><a href="08-cnn.pdf"> Convolutional Neural Networks</a> </td>
-          <td>Chap 7 of D2L<br />
+          <td><a href="/class/schedule/languagechange.html">Language Contact and Change</a><br />
+          </td>
+          <td><br />
           </td>
           <td></td>
         </tr>
         <tr>
-          <td>9<br />
+          <td>8<br />
           </td>
-          <td>2/8<br />
+          <td>9/21<br />
           </td>
-          <td><a href="08-cnn.pdf">  Convolutional Neural Networks  </a><br />
+          <td><a href="/class/schedule/multilingualtransfer.html">Multilingual Training and Transfer</a><br />
           </td>
-          <td>Chap 7 of D2L<br />
+          <td><br />
           </td>
           <td><br />
           </td>
         </tr>
         <tr>
-          <td><br />
+          <td>9<br />
           </td>
-          <td>2/10</td>
-          <td>Recitation:<a href="recitation_week5.pdf">recitation_week5</a></td>
+          <td>9/26</td>
+          <td><a href="/class/schedule/unsupervisedaugmentation.html">Unsupervised Machine Translation</a></td>
           <td><br />
           </td>
           <td><br />
@@ -225,67 +178,30 @@
         <tr>
           <td>10<br />
           </td>
-          <td>2/13<br />
+          <td>9/28<br />
           </td>
-          <td><a href="09-resnet.pdf"> ResNet and other CNN variants  </a><br />
+          <td><a href="/class/schedule/codeswitchpidgincreole.html">Code Switching, Pidgins, Creoles</a></td>
+          <td><br />
           </td>
-          <td>Chap 8 of D2L<br />
-          </td>
-          <td>HW2 Due, <a href="cs190I_dl23w_hw3.pdf">HW3</a> out<br />
+          <td><br />
           </td>
         </tr>
         <tr>
           <td>11<br />
           </td>
-          <td>2/15<br />
+          <td>10/3<br />
           </td>
-          <td> <a href="10-optimization.pdf"> Optimization for ML </a><br />
-          </td>
-          <td>Chap 12 of D2L<br />
+          <td><a href="/class/schedule/ieqa.html">Multilingual Question Answering </a> </td>
+          <td><br />
           </td>
           <td><br />
           </td>
         </tr>
-        <tr>
-          <td><br />
-          </td>
-          <td>2/17</td>
-          <td>Recitation:<a href="recitation_week6.pdf">recitation_week6</a></td>
-          <td><br />
-          </td>
-          <td>MP1 Due, <a href="mp2/cs190I_dl23w_mp2.pdf"> MP2</a> out<br />
-          </td>
-        </tr>        
-        <tr>
-          <td><br />
-          </td>
-          <td>2/20<br />
-          </td>
-          <td>holiday. no class<br />
-          </td>
-          <td><br />
-          </td>
-          <td><br />
-          </td>
-        </tr>        
         <tr>
           <td>12<br />
           </td>
-          <td>2/22<br />
-          </td>
-          <td> <a href="11-detection.pdf"> Object Detection
-            </a><br />
-          </td>
-          <td>Chap 14 of D2L<br />
-          </td>
-          <td><br />
-          </td>
-        </tr>
-        <tr>
-          <td><br />
-          </td>
-          <td>2/24</td>
-          <td>Recitation: <a href="recitation_week7.pdf">recitation_week7</a></td>
+          <td>10/5</td>
+          <td><a href="/class/schedule/speech.html">Speech</a></td>
           <td><br />
           </td>
           <td><br />
@@ -294,41 +210,53 @@
         <tr>
           <td>13<br />
           </td>
-          <td>2/27<br />
+          <td>10/10<br />
           </td>
-          <td> <a href="12-recurrent_neural_net.pdf"> Recurrent Neural Networks </a></td>
-          <td>Chap 9 of D2L<br />
+          <td><a href="/class/schedule/asr.html">Automatic Speech Recognition</a> </td>
+          <td><br />
           </td>
           <td></td>
         </tr>
         <tr>
           <td>14<br />
           </td>
-          <td>3/1<br />
+          <td>10/12<br />
           </td>
-          <td><a href="13-seq2seq_Transformer.pdf"> Sequence-to-Sequence Learning and Transformer </a> </td>
-          <td>Chap 10, 11 of D2L<br />
+          <td><a href="/class/schedule/seq2seqspeech.html">Sequence-to-sequence Speech Recognition  </a><br />
           </td>
-          <td>HW3 Due<br />
+          <td><br />
+          </td>
+          <td><br />
           </td>
         </tr>
         <tr>
           <td><br />
           </td>
-          <td>3/3</td>
-          <td>Recitation:<a href="recitation_week8.ipynb">recitation_week8</a></td>
+          <td>10/17</td>
+          <td>Fall Break</td>
           <td><br />
           </td>
           <td><br />
           </td>
-        </tr>        
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>10/19</td>
+          <td>Fall Break</td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
         <tr>
           <td>15<br />
           </td>
-          <td>3/6<br />
+          <td>10/24<br />
           </td>
-          <td><a href="14-pretrained_langauge_models.pdf">Pretrained Language Models </a> </td>
-          <td>Chap 15.8-15.10, Chap 16.6, 16.9 of D2L, <a href="https://arxiv.org/abs/1810.04805">BERT</a>, <a href="https://arxiv.org/abs/2005.14165">GPT3</a>, <a href="https://arxiv.org/abs/2203.02155">InstructGPT</a> <br />
+          <td> <a href="/class/schedule/tts.html">Text-to-speech </a><br />
+          </td>
+          <td><br />
           </td>
           <td><br />
           </td>
@@ -336,18 +264,8 @@
         <tr>
           <td>16<br />
           </td>
-          <td>3/8<br /></td>
-          <td><a href="15-GNN.pdf">Graph Neural Networks</a> </td>
-          <td>
-          </td>
-          <td><br />
-          </td>
-        </tr>
-        <tr>
-          <td><br />
-          </td>
-          <td>3/10</td>
-          <td>Recitation: <a href="https://nlp.seas.harvard.edu/2018/04/03/attention.html">Annotated Transformer</a> </td>
+          <td>10/26</td>
+          <td><a href="/class/schedule/multilingualasrtts.html">Multilingual ASR and TTS</a></td>
           <td><br />
           </td>
           <td><br />
@@ -356,47 +274,132 @@
         <tr>
           <td>17<br />
           </td>
-          <td>3/13<br />
+          <td>10/31<br />
           </td>
-          <td><a href="16-VAE.pdf">Variational Auto-Encoder</a> </td>
-          <td><a href="http://arxiv.org/abs/1312.6114">VAE</a>, <a href="https://aclanthology.org/K16-1002">Sentence VAE</a> <br />
+          <td><a href="/class/schedule/morphology.html">Morphological Analysis and Inflection </a><br />
           </td>
-          <td><br />
-          </td>
-        </tr>
-        <tr>
-          <td>18<br />
-          </td>
-          <td>3/15<br />
-          </td>
-          <td>Guest Lecture on Industrial Application of Deep Learning</td>
-          <td> <br />
-          </td>
-          <td>MP2 Due<br />
-          </td>
-        </tr>
-        <tr>
-          <td><br />
-          </td>
-          <td>3/17</td>
-          <td>Recitation: Final Prep</td>
           <td><br />
           </td>
           <td><br />
           </td>
         </tr>        
         <tr>
-          <td><br />
+          <td>18<br />
           </td>
-          <td>3/xx<br />
+          <td>11/2<br />
           </td>
-          <td>Final Exam<br />
+          <td> <a href="/class/schedule/syntax.html">Syntax and Parsing </a><br />
           </td>
           <td><br />
           </td>
           <td><br />
           </td>
         </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>11/7</td>
+          <td>Democracy Day Holiday</td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>        
+        <tr>
+          <td>19<br />
+          </td>
+          <td>11/9<br />
+          </td>
+          <td> <a href="/class/schedule/dataannotation.html">Data Annotation </a></td>
+          <td><br />
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>20<br />
+          </td>
+          <td>11/14<br />
+          </td>
+          <td><a href="/class/schedule/activelearning.html">Active Learning </a> </td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td>21<br />
+          </td>
+          <td>11/16</td>
+          <td><a href="/class/schedule/lorelei.html">The LORELEI Project</a></td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>        
+        <tr>
+          <td>22<br />
+          </td>
+          <td>11/21<br />
+          </td>
+          <td><a href="/class/schedule/guestlecturealonlaviecraigstewart.html">Guest Lecture - Alon Lavie and Craig Stewart</a> </td>
+          <td> <br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>11/23<br /></td>
+          <td>Thanksgiving, no classes </td>
+          <td>
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td>23<br />
+          </td>
+          <td>11/28</td>
+          <td><a href="/class/schedule/guestlecturehengji.html">Guest Lecture - Heng Ji</a> </td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>        
+        <tr>
+          <td>24<br />
+          </td>
+          <td>11/30<br />
+          </td>
+          <td><a href="/class/schedule/guestlecturejonathanamith.html">Guest Lecture - Jonathn Amith </a></td>
+          <td><br />
+          </td>
+          <td><br />
+          </td>
+        </tr>
+        <tr>
+          <td><br />
+          </td>
+          <td>12/5<br />
+          </td>
+          <td><a href="/class/schedule/posters.html">Poster Presentations </a></td>
+          <td> <br />
+          </td>
+          <td><br />
+          </td>
+        </tr> 
+        <tr>
+          <td><br />
+          </td>
+          <td>12/7<br />
+          </td>
+          <td><a href="/class/schedule/posters.html">Poster Presentations </a></td>
+          <td> <br />
+          </td>
+          <td><br />
+          </td>
+        </tr>       
       </tbody>
     </table>
     <p><br />
