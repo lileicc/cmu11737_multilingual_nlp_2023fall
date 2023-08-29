@@ -1,410 +1,446 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-    <meta />
-    <meta />
-    <meta />
-    <link rel="stylesheet" type="text/css" href="origo.css" media="all" />
-    <meta name="author" content="Lei Li" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta>
+    <meta>
+    <meta>
+    <link rel="stylesheet" type="text/css" href="origo.css" media="all">
+    <meta name="author" content="Lei Li">
     <title>DL</title>
   </head>
   <body>
-    <h1 align="center">CMU 11-737: Multilingual Natural Language Processing<br />
+    <h1 align="center">CMU 11-737: Multilingual Natural Language
+      Processing<br>
     </h1>
     <h2>Course Description </h2>
-    <p>CMU 11-737 is an advanced graduate-level course on natural language processing techniques applicable to many languages. Students who take this course should be able to develop linguistically motivated solutions to core and applied NLP tasks for any language. This includes understanding and mitigating the difficulties posed by lack of data in low-resourced languages or language varieties, and the necessity to model particular properties of the language of interest such as complex morphology or syntax. The course will introduce modeling solutions to these issues such as multilingual or cross-lingual methods, linguistically informed NLP models, and methods for effectively bootstrapping systems with limited data or human intervention. The project work will involve building an end-to-end NLP pipeline in a language you don’t know. </p>
+    <p>CMU 11-737 is an advanced graduate-level course on natural
+      language processing techniques applicable to many languages.
+      Students who take this course should be able to develop
+      linguistically motivated solutions to core and applied NLP tasks
+      for any language. This includes understanding and mitigating the
+      difficulties posed by lack of data in low-resourced languages or
+      language varieties, and the necessity to model particular
+      properties of the language of interest such as complex morphology
+      or syntax. The course will introduce modeling solutions to these
+      issues such as multilingual or cross-lingual methods,
+      linguistically informed NLP models, and methods for effectively
+      bootstrapping systems with limited data or human intervention. The
+      project work will involve building an end-to-end NLP pipeline in a
+      language you don’t know. </p>
     <h2>Instructor</h2>
-    <p><a href="https://www.cs.cmu.edu/%7Eleili">Lei Li</a> 
-      (Office Hour: Tuesday 4-5pm GHC 6403, book a slot <a href="https://calendar.app.google/4vm4CAe8KzVYpq1B8">here</a> or drop in)
-    </p>
+    <p><a href="https://www.cs.cmu.edu/%7Eleili">Lei Li</a> (Office
+      Hour: Tuesday 4-5pm GHC 6403, book a slot <a
+        href="https://calendar.app.google/4vm4CAe8KzVYpq1B8">here</a> or
+      drop in) </p>
     <h2>Teaching Assistants </h2>
     TA Mailing list: <tt>cs11-737-fa2023-tas</tt><tt>@</tt><tt>cs.cmu.edu</tt>
     <ul>
-      <li><a href="https://simran-khanuja.github.io/">Simran Khanuja</a> (Office Hour: Friday 4-5pm)</li>
-      <li><a href="https://sayalikandarkar.github.io/">Sayali Kandarkar</a> (Office Hour: Wednesday 3-4pm) </li>
-      <li><a href="https://www.linkedin.com/in/yudong-liu-510929205/">Yudong Liu</a> (Office Hour: xxx) </li>
+      <li><a href="https://simran-khanuja.github.io/">Simran Khanuja</a>
+        (Office Hour: Friday 4-5pm)</li>
+      <li><a href="https://sayalikandarkar.github.io/">Sayali Kandarkar</a>
+        (Office Hour: Wednesday 3-4pm) </li>
+      <li><a href="https://www.linkedin.com/in/yudong-liu-510929205/">Yudong
+
+          Liu</a> (Office Hour: Monday 4-5pm) </li>
     </ul>
     <h2>Time and Location</h2>
-    <p> Tuesday and Thursday, 2-3:20pm, Doherty Hall 1212 (in-person expected)</p>
-
+    <p> Tuesday and Thursday, 2-3:20pm, Doherty Hall 1212 (in-person
+      expected)</p>
     <h2>Prerequisites</h2>
-    <p> You are highly recommended to take a NLP (11-411 or 11-611 or 11-711) course previously. The assignments for the class will be done by creating neural network models, and examples will be provided using PyTorch. If you are not familiar with PyTorch, we suggest you attempt to familiarize yourself using online tutorials (for example Deep Learning for NLP with PyTorch) before starting the class.
-    </p>
+    <p> You are highly recommended to take a NLP (11-411 or 11-611 or
+      11-711) course previously. The assignments for the class will be
+      done by creating neural network models, and examples will be
+      provided using PyTorch. If you are not familiar with PyTorch, we
+      suggest you attempt to familiarize yourself using online tutorials
+      (for example Deep Learning for NLP with PyTorch) before starting
+      the class. </p>
     <h2>Class Format</h2>
-    <p> For each class there will be:
-      <ul>
-        <li><i>Reading:</i> Most classes will have associated reading material that we recommend you read before the class to familiarize yourself with the topic.
-        </li>
-        <li><i>Lecture:</i> The first part of the class with feature a lecture to overview the topic of the day, in which you can ask questions to clarify about any of the material.
-        </li>
-        <li><i>Language in 10:</i> Groups in the class will make a 10-minute presentation of one of the languages of the world.
-        </li>
-        <li><i>Discussion:</i> There will be an open-ended discussion in which we will split into small groups and discuss a question regarding the class.
-        </li>
-      </ul> 
-    </p>
-    <h2>Homework Submission &amp; Grading</h2>
-        Please submit your homework on canvas or the specified platform. The assignments will be given a grade of A+ (100), A (96), A- (92), B+ (88), B (85), B- (82), or below. The final grades will be determined based on the weighted average of discussion participation, assignments, and project. Cutoffs for final grades will be approximately 97+ A+, 93+ A, 90+ A-, 87+ B+, 83+ B, 80+ B-, etc., although we reserve some flexibility to change these thresholds slightly.
-        <ul>
-        <li><i>Participation:</i> Worth 5% of the grade. Your lowest 3 participation grades will be dropped.</li>
-        <li><i>Assignments:</i> There will be 4 assignments (the final one being the project), worth respectively 20%, 20%, 15%, 30% of the grade.</li>
-        <li><i><a href="LanguageIn10.html">Language in 10</a>: 10% of grade</i></li>
-        </ul>
-        The details of the assignments are elaborated on the <a href="assignments.html">assignments page</a>.
-        </p>
-      </li>
+    <p> For each class there will be: </p>
+    <ul>
+      <li><i>Reading:</i> Most classes will have associated reading
+        material that we recommend you read before the class to
+        familiarize yourself with the topic. </li>
+      <li><i>Lecture:</i> The first part of the class with feature a
+        lecture to overview the topic of the day, in which you can ask
+        questions to clarify about any of the material. </li>
+      <li><i>Language in 10:</i> Groups in the class will make a
+        10-minute presentation of one of the languages of the world. </li>
+      <li><i>Discussion:</i> There will be an open-ended discussion in
+        which we will split into small groups and discuss a question
+        regarding the class. </li>
     </ul>
+    <h2>Homework Submission &amp; Grading</h2>
+    Please submit your homework on canvas or the specified platform. The
+    assignments will be given a grade of A+ (100), A (96), A- (92), B+
+    (88), B (85), B- (82), or below. The final grades will be determined
+    based on the weighted average of discussion participation,
+    assignments, and project. Cutoffs for final grades will be
+    approximately 97+ A+, 93+ A, 90+ A-, 87+ B+, 83+ B, 80+ B-, etc.,
+    although we reserve some flexibility to change these thresholds
+    slightly.
+    <ul>
+      <li><i>Participation:</i> Worth 5% of the grade. Your lowest 3
+        participation grades will be dropped.</li>
+      <li><i>Assignments:</i> There will be 4 assignments (the final one
+        being the project), worth respectively 20%, 20%, 15%, 30% of the
+        grade.</li>
+      <li><i><a href="LanguageIn10.html">Language in 10</a>: 10% of
+          grade</i></li>
+      <li><i><a href="multiling_reading.html">Reading List for
+            Assignment 3</a> (Blog)<br>
+        </i></li>
+    </ul>
+    <br>
     <h2>Discussion Forum</h2>
-    <p>We will use the Ed platform for discussions <a href="https://edstem.org/us/join/qbssDd">(sign up here)</a>, but coming to office hours is also encouraged. You may send private message on edstem platform as well. 
-    </p>
-    </p>
+    <p>We will use the Ed platform for discussions <a
+        href="https://edstem.org/us/join/qbssDd">(sign up here)</a>, but
+      coming to office hours is also encouraged. You may send private
+      message on edstem platform as well. </p>
     <h2>Syllabus</h2>
     <table width="100%" border="0">
       <tbody>
         <tr>
-          <td>#<br />
+          <td>#<br>
           </td>
-          <td>Date<br />
+          <td>Date<br>
           </td>
-          <td>Topic<br />
+          <td>Topic<br>
           </td>
-          <td>Reading<br />
+          <td>Material<br>
           </td>
-          <td>Homework<br />
-          </td>
-        </tr>
-        <tr>
-          <td>1<br />
-          </td>
-          <td>8/29<br />
-          </td>
-          <td> <a href="slides/multiling-01-intro.pdf">Introduction </a><br />
-          </td>
-          <td><br />
-          </td>
-          <td><br />
+          <td>Homework<br>
           </td>
         </tr>
         <tr>
-          <td>2<br />
+          <td>1<br>
           </td>
-          <td>8/31<br />
+          <td>8/29<br>
           </td>
-          <td>Sequence Labeling <br />
+          <td> <a href="slides/multiling-01-intro.pdf">Introduction </a><br>
           </td>
-          <td><br />
+          <td><br>
           </td>
-          <td><br />
+          <td>Reading List out<br>
           </td>
         </tr>
         <tr>
-          <td>3<br />
+          <td>2<br>
+          </td>
+          <td>8/31<br>
+          </td>
+          <td>Sequence Labeling <br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>3<br>
           </td>
           <td>9/5</td>
           <td>Typology: The Space of Languages </td>
-          <td><br />
+          <td><br>
           </td>
-          <td><br />
+          <td>HW1 out<br>
           </td>
         </tr>
         <tr>
-          <td>4<br />
+          <td>4<br>
           </td>
           <td>9/7</td>
           <td>Translation and Translation Data </td>
-          <td><br />
+          <td><br>
           </td>
-          <td><br />
-          </td>
-        </tr>        
-        <tr>
-          <td>5<br />
-          </td>
-          <td>9/12<br />
-          </td>
-          <td>Translation Models<br />
-          </td>
-          <td><br />
-          </td>
-          <td><br />
+          <td><br>
           </td>
         </tr>
         <tr>
-          <td>6<br />
+          <td>5<br>
+          </td>
+          <td>9/12<br>
+          </td>
+          <td>Translation Models<br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>6<br>
           </td>
           <td>9/14</td>
           <td>Data-driven Strategies for NMT</td>
-          <td><br />
+          <td><br>
           </td>
-          <td><br />
-          </td>
-        </tr>        
-        <tr>
-          <td>7<br />
-          </td>
-          <td>9/19<br />
-          </td>
-          <td>Language Contact and Change<br />
-          </td>
-          <td><br />
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>8<br />
-          </td>
-          <td>9/21<br />
-          </td>
-          <td>Multilingual Training and Transfer<br />
-          </td>
-          <td><br />
-          </td>
-          <td><br />
+          <td><br>
           </td>
         </tr>
         <tr>
-          <td>9<br />
+          <td>7<br>
+          </td>
+          <td>9/19<br>
+          </td>
+          <td>Language Contact and Change<br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>8<br>
+          </td>
+          <td>9/21<br>
+          </td>
+          <td>Multilingual Training and Transfer<br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>9<br>
           </td>
           <td>9/26</td>
           <td>Unsupervised Machine Translation</td>
-          <td><br />
+          <td><br>
           </td>
-          <td><br />
-          </td>
+          <td>HW1 Due, HW2 out </td>
         </tr>
         <tr>
-          <td>10<br />
+          <td>10<br>
           </td>
-          <td>9/28<br />
+          <td>9/28<br>
           </td>
           <td>Code Switching, Pidgins, Creoles</td>
-          <td><br />
+          <td><br>
           </td>
-          <td><br />
-          </td>
-        </tr>
-        <tr>
-          <td>11<br />
-          </td>
-          <td>10/3<br />
-          </td>
-          <td>Multilingual Question Answering  </td>
-          <td><br />
-          </td>
-          <td><br />
+          <td><br>
           </td>
         </tr>
         <tr>
-          <td>12<br />
+          <td>11<br>
+          </td>
+          <td>10/3<br>
+          </td>
+          <td>Multilingual Question Answering </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>12<br>
           </td>
           <td>10/5</td>
-          <td>Speech</td>
-          <td><br />
-          </td>
-          <td><br />
-          </td>
-        </tr>        
-        <tr>
-          <td>13<br />
-          </td>
-          <td>10/10<br />
-          </td>
           <td>Automatic Speech Recognition </td>
-          <td><br />
+          <td><br>
           </td>
-          <td></td>
+          <td>Project Proposal Due </td>
         </tr>
         <tr>
-          <td>14<br />
+          <td>13<br>
           </td>
-          <td>10/12<br />
+          <td>10/10<br>
           </td>
-          <td>Sequence-to-sequence Speech Recognition  <br />
+          <td>Sequence-to-sequence Speech Recognition </td>
+          <td><br>
           </td>
-          <td><br />
-          </td>
-          <td><br />
+          <td><br>
           </td>
         </tr>
         <tr>
-          <td><br />
+          <td>14<br>
+          </td>
+          <td>10/12<br>
+          </td>
+          <td>Text-to-speech </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td><br>
           </td>
           <td>10/17</td>
           <td>Fall Break</td>
-          <td><br />
+          <td><br>
           </td>
-          <td><br />
+          <td><br>
           </td>
         </tr>
         <tr>
-          <td><br />
+          <td><br>
           </td>
           <td>10/19</td>
           <td>Fall Break</td>
-          <td><br />
+          <td><br>
           </td>
-          <td><br />
-          </td>
-        </tr>
-        <tr>
-          <td>15<br />
-          </td>
-          <td>10/24<br />
-          </td>
-          <td>Text-to-speech <br />
-          </td>
-          <td><br />
-          </td>
-          <td><br />
+          <td><br>
           </td>
         </tr>
         <tr>
-          <td>16<br />
+          <td>15<br>
+          </td>
+          <td>10/24<br>
+          </td>
+          <td>Multilingual ASR and TTS </td>
+          <td><br>
+          </td>
+          <td>HW 2 Due </td>
+        </tr>
+        <tr>
+          <td>16<br>
           </td>
           <td>10/26</td>
-          <td>Multilingual ASR and TTS</td>
-          <td><br />
+          <td>Speech Translation<br>
           </td>
-          <td><br />
+          <td><br>
           </td>
-        </tr>        
-        <tr>
-          <td>17<br />
-          </td>
-          <td>10/31<br />
-          </td>
-          <td>Morphological Analysis and Inflection <br />
-          </td>
-          <td><br />
-          </td>
-          <td><br />
-          </td>
-        </tr>        
-        <tr>
-          <td>18<br />
-          </td>
-          <td>11/2<br />
-          </td>
-          <td> Syntax and Parsing <br />
-          </td>
-          <td><br />
-          </td>
-          <td><br />
+          <td><br>
           </td>
         </tr>
         <tr>
-          <td><br />
+          <td>17<br>
+          </td>
+          <td>10/31<br>
+          </td>
+          <td>Guest Lecture: Speech Representation Learning<br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>18<br>
+          </td>
+          <td>11/2<br>
+          </td>
+          <td>Morphological Analysis and Inflection </td>
+          <td><br>
+          </td>
+          <td>Mid-term Report Due<br>
+          </td>
+        </tr>
+        <tr>
+          <td><br>
           </td>
           <td>11/7</td>
           <td>Democracy Day Holiday</td>
-          <td><br />
+          <td><br>
           </td>
-          <td><br />
+          <td><br>
           </td>
-        </tr>        
+        </tr>
         <tr>
-          <td>19<br />
+          <td>19<br>
           </td>
-          <td>11/9<br />
+          <td>11/9<br>
+          </td>
+          <td> Syntax and Parsing </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>20<br>
+          </td>
+          <td>11/14<br>
           </td>
           <td> Data Annotation </td>
-          <td><br />
+          <td><br>
           </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>20<br />
-          </td>
-          <td>11/14<br />
-          </td>
-          <td>Active Learning  </td>
-          <td><br />
-          </td>
-          <td><br />
+          <td><br>
           </td>
         </tr>
         <tr>
-          <td>21<br />
+          <td>21<br>
           </td>
           <td>11/16</td>
+          <td>Active Learning </td>
+          <td><br>
+          </td>
+          <td>HW3 Due </td>
+        </tr>
+        <tr>
+          <td>22<br>
+          </td>
+          <td>11/21<br>
+          </td>
           <td>The LORELEI Project</td>
-          <td><br />
+          <td> <br>
           </td>
-          <td><br />
-          </td>
-        </tr>        
-        <tr>
-          <td>22<br />
-          </td>
-          <td>11/21<br />
-          </td>
-          <td>Guest Lecture -  </td>
-          <td> <br />
-          </td>
-          <td><br />
+          <td><br>
           </td>
         </tr>
         <tr>
-          <td><br />
+          <td><br>
           </td>
-          <td>11/23<br /></td>
+          <td>11/23<br>
+          </td>
           <td>Thanksgiving, no classes </td>
-          <td>
+          <td> <br>
           </td>
-          <td><br />
+          <td><br>
           </td>
         </tr>
         <tr>
-          <td>23<br />
+          <td>23<br>
           </td>
           <td>11/28</td>
-          <td>Guest Lecture -  </td>
-          <td><br />
+          <td>Guest Lecture - </td>
+          <td><br>
           </td>
-          <td><br />
-          </td>
-        </tr>        
-        <tr>
-          <td>24<br />
-          </td>
-          <td>11/30<br />
-          </td>
-          <td>Guest Lecture -  </td>
-          <td><br />
-          </td>
-          <td><br />
+          <td><br>
           </td>
         </tr>
         <tr>
-          <td><br />
+          <td>24<br>
           </td>
-          <td>12/5<br />
+          <td>11/30<br>
           </td>
-          <td>Poster Presentations </td>
-          <td> <br />
+          <td>Guest Lecture - </td>
+          <td><br>
           </td>
-          <td><br />
+          <td><br>
           </td>
-        </tr> 
+        </tr>
         <tr>
-          <td><br />
+          <td><br>
           </td>
-          <td>12/7<br />
+          <td>12/5<br>
           </td>
           <td>Poster Presentations </td>
-          <td> <br />
+          <td> <br>
           </td>
-          <td><br />
+          <td><br>
           </td>
-        </tr>       
+        </tr>
+        <tr>
+          <td><br>
+          </td>
+          <td>12/7<br>
+          </td>
+          <td>Poster Presentations </td>
+          <td> <br>
+          </td>
+          <td>Final Report Due<br>
+          </td>
+        </tr>
       </tbody>
     </table>
-    <p><br />
+    <p><br>
     </p>
+    <!-- Graph Neural Network 
+<a href="http://arxiv.org/abs/1609.02907">GCN</a>, <a href="https://arxiv.org/pdf/1704.01212.pdf">MPNN</a> -->
   </body>
 </html>
-
-
 <!-- Graph Neural Network 
 <a href="http://arxiv.org/abs/1609.02907">GCN</a>, <a href="https://arxiv.org/pdf/1704.01212.pdf">MPNN</a> -->
