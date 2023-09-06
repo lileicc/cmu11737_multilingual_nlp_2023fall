@@ -1,3 +1,8 @@
+In this assignment, you will train machine translation models for a low-resource lanaguage (to English). You will complete three models: 
+1. Bilingual baseline model
+2. Multlingual trained model
+3. Finetuning pre-trained models 
+
 # Resources and GCP
 Having a GPU is not necessary but highly recommended. Google Cloud provides for $300 free credits for new users. Instructions on how to set it up can be found in `GCP.md`. Additionally, please visit TA office hours if y'all still face issues in setting this up.
 
@@ -126,28 +131,46 @@ You should be able to reproduce the numbers below on the validation set. To acco
 With slight modifications in the script, you can obtain predictions for the test set. These prediction files need to be submitted to the kaggle leaderboard and can be converted to a CSV format compatible for submission using the `convert_to_csv.py` script. The benchmark submission for this baseline is titled `test-flores-prediction.csv` on the leaderboard. Please name your submission `<andrew_id>-flores`.
 
 
-# Improving Multilingual Transfer
+# Improving Multilingual Training and Transfer
+
+
+## Better Language-specific Architectures
+There are many ways to improve the design of model architecture. 
+One key bottleneck for multlingual modelling is the language interference in neural models. 
+Yuan et al [1] develops a massive multiway detachable model (LegoMT).
+Fan et al [2] and Costa-jussà et al [3] uses mixture-of-expert models (MoE) for multilingual MT. [4] introduce better training strategy for routing in experts. 
+Lin et al [5] develops multilingual MT models to alliviate the interference explicity with learned langauge-specific sub-networks (LaSS).
+
+Adapter  [6] [7] is a general method that introduces a new small set of parameters to the model when finetuning, leaving the original parameters fixed. Adapter finetuning has been shown to improve the performance of multilingual models when finetuning in new languages.
+Zhang et. [8] propose adding language-aware modules in the NMT model.
+
+
 
 ## Data Augmentation
-Extra monolingual data is often helpful for improving NMT performance. Specifically, back-translation [2,3] has been widely used to boost the performance of low-resource NMT. A closely related method, self-training, is recently proven to be effective as well [4]. Recently, several methods have been proposed to combine different methods of using monolingual data with multilingual training. Xia et al. [5] explores several different strategies for modifying the related language data to improve multilingual training. [6] adds a masked language model objective for monolingual data while training a multilingual model.
+Extra monolingual data is often helpful for improving NMT performance. Specifically, back-translation [9,10] has been widely used to boost the performance of low-resource NMT. 
+Creating mix-coded data for multilingual training is particularly useful, as in mRASP [11] and Xia et al. [12]. 
+
+## Better Training Objectives
+Pan et al [13] develops contrastive learning for multlingual many-to-many translation (mRASP2). 
+[14] adds a masked language model objective for monolingual data while training a multilingual model.
+
+## Using Pre-trained Language Models
+Yang et al [15] uses a pre-trained BERT model in machine translation. Sun et al [16] combines a pre-trained multlingual BERT and multlingual GPT together and obtains a stronger mutlingual MT model. 
+Liu et al [17] is another way to pre-train a sequence-to-sequence model using raw data and further fine-tune on mutlingual parallel data for translation. 
+
+
+## Better Word Representation or Tokenization
+Vocabulary differences between the low-resource language and its related high-resource language is an important bottleneck for multilingual transfer. 
+Xu et al [18] formulates the vocabulary learning as an optimal transport problem. Wang et al [19] propose a character-aware embedding method for multilingual training. For morphological rich languages, such as Turkish and Azerbaijani, it is also useful to use the morphology information in word representations [20].
+
+Recently, several approaches are proposed to improve the word segmentation for standard NMT models [21], [22]. It is possible that these improvements would be helpful for multilingual NMT as well.
 
 ## Choosing Transfer Languages
-For the provided multilingual training method, we simply use a closely related high-resource language as a transfer language. However, it is likely that data from other languages would be helpful as well. Lin et al. [7] has done a systematic study of choosing transfer languages for NLP tasks. There are also methods designed to choose multilingual data for specific NLP tasks [8].
+For the provided multilingual training method, we simply use a closely related high-resource language as a transfer language. However, it is likely that data from other languages would be helpful as well. Lin et al. [23] has done a systematic study of choosing transfer languages for NLP tasks. 
 
-## Better Word Representation or Segmentation
-Vocabulary differences between the low-resource language and its related high-resource language is an important bottleneck for multilingual transfer. Wang et al [9] propose a character-aware embedding method for multilingual training. For morphological rich languages, such as Turkish and Azerbaijani, it is also useful to use the morphology information in word representations [10].
-
-Recently, several approaches are proposed to improve the word segmentation for standard NMT models [11, 12]. It is possible that these improvements would be helpful for multilingual NMT as well.
-
-## Better Modeling
-You can also improve the NMT architecture or optimization to better model data from multiple languages. Wang et al. [13] propose three strategies to improve one-to-many translation, including better initialization and language-specific embedding. Zhang et. [14] propose adding language-aware modules in the NMT model.
 
 ## Efficient Finetuning
-While pretrained multilingual models are generally more data-efficient efficient than bilingual models trained from scratch, they are still relatively data-hungry and can result in poor performance in extremely low-resource settings. Recently several approaches have been proposed to improve both data and parameter efficiency of pretrained machine translation models.
-
-Adapter finetuning [15] is a general method that introduces a new small set of parameters to the model when finetuning, leaving the original parameters fixed. Adapter finetuning has been shown to improve the performance of multilingual models when finetuning in new languages [16].
-
-Prefix-tuning [17] is an alternative finetuning paradigm that adds a parametrized prefix to inputs (embeddings) to the model and trains these prefixes, leaving the original model parameters fixed. Prefix-tuning can be even more parameter and data-efficient than adapter finetuning [18], but little research has been done in applying prefix-tuning to machine translation.
+Prefix-tuning [24] is an alternative finetuning paradigm that adds a parametrized prefix to inputs (embeddings) to the model and trains these prefixes, leaving the original model parameters fixed. 
 
 ## Other Approaches
 There are many potential directions for improving multilingual training and finetuning. We encourage you to do more literature research, and even come up with your own method!
@@ -170,41 +193,56 @@ If using existing code, please cite your sources.
 Your submission consists of three parts: *code*, *model outputs* and *writeup*. Put all your code in a folder named `code` and instructions on how to run if you have implemented additional code. Include the output of your models in an outputs directory, with a description of what model each file is associated with. Rename the writeup as `writeup.pdf` and compress all of them as `<andrew_id>-assn1.zip`. This file must be submitted to Canvas.
 
 References
-[1]: Qi et al. When and Why are pre-trained word embeddings useful for Neural Machine Translation
+[1] Yuan et al. Lego-MT: Learning Detachable Models for Massively Multilingual Machine Translation. ACL 2023.
 
-[2]: Edunov et al. Understanding back-translation at scale.
+[2] Fan et al. Beyond english-centric multilingual machine translation. JMLR 2021.
 
-[3]: Sennrich et al. Improving neural machine translation models with monolingual data
+[3] Costa-jussà et al. No language left behind: Scaling human-centered machine translation. 2022.
 
-[4]: He et al. Revisiting self-training for neural sequence generation
+[4]: StableMoE: Stable Routing Strategy for Mixture of Experts. ACL 2022.
 
-[5]: Xia et al. Generalized data augmentation for low-resource translation
+[5] Lin et al. Learning Language Specific Sub-network for Multilingual Machine Translation. ACL 2021.
 
-[6]: Siddhant et al. Leveraging monolingual data with self-supervision for multilingual neural machine translation
+[6] Bapna and Firat. Simple, Scalable Adaptation for Neural Machine Translation. EMNLP 2019.
 
-[7]: Lin et al. Choosing transfer languages for cross-lingual learning
+[7] Zhu et al. Counter-Interference Adapter for Multilingual Machine Translation. EMNLP 2021.
 
-[8]: Wang et al. Target conditioned sampling: Optimizing data selection for multilingual neural machine translation
+[8] Zhang et al. Improving massively multilingual neural machine translation and zero-shot translation
 
-[9]: Wang et al. Multilingual neural machine translation with soft decoupled encoding
+[9]: Edunov et al. Understanding back-translation at scale.
 
-[10]: Chaudhary et al. Adapting word embeddings to new languages with morphological and phonological subword
+[10]: Sennrich et al. Improving neural machine translation models with monolingual data
 
-[11]: Provilkov et al. BPE-dropout: Simple and effective subword regularization
+[11]: Lin et al. Pre-training Multilingual Neural Machine Translation by Leveraging Alignment Information, EMNLP 2020.
 
-[12]: He et al. Dynamic programming encoding for subword segmentation in neural machine translation
+[12]: Xia et al. Generalized data augmentation for low-resource translation, 2019.
 
-[13]: Wang et al. Three strategies to improve one-to-many multilingual translation
+[13] Pan et al. Contrastive Learning for Many-to-many Multilingual Neural Machine Translation. ACL 2021. 
 
-[14]: Zhang et al. Improving massively multilingual neural machine translation and zero-shot translation
+[14]: Siddhant et al. Leveraging monolingual data with self-supervision for multilingual neural machine translation.
 
-[15]: Houlsby et al. Parameter-Efficient Transfer Learning for NLP
 
-[16]: Philip et al. Monolingual Adapters for Zero-Shot Neural Machine Translation
+[15] Yang et al. Towards Making the Most of BERT in Neural Machine Translation. AAAI 2019.
 
-[17]: Li et al. Prefix-Tuning: Optimizing Continuous Prompts for Generation
+[16] Sun et al. Multilingual Translation via Grafting Pre-trained Language Models. EMNLP 2021
 
-[18]: He et al. Towards a Unified View of Parameter-Efficient Transfer Learning
+[17] Liu et al. Multilingual Denoising Pre-training for Neural Machine Translation. 2020
+
+[18] Xu et al. Vocabulary Learning via Optimal Transport for Neural Machine Translation. ACL 2021.
+
+[19] Wang et al. Multilingual neural machine translation with soft decoupled encoding
+
+[20] Chaudhary et al. Adapting word embeddings to new languages with morphological and phonological subword
+
+[21] Provilkov et al. BPE-dropout: Simple and effective subword regularization
+
+[22] He et al. Dynamic programming encoding for subword segmentation in neural machine translation
+
+[23] Lin et al. Choosing transfer languages for cross-lingual learning.
+
+[24]: Li et al. Prefix-Tuning: Optimizing Continuous Prompts for Generation
+
+
 
 
 
