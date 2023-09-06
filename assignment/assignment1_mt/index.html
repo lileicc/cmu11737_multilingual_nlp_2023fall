@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta>
+    <meta>
+    <meta>
+    <link rel="stylesheet" type="text/css" href="../../origo.css"
+      media="all">
+    <meta name="author" content="Lei Li">
+    <title>Multilingual NLP Assignment 1</title>
+  </head>
+  <body>
+    <h1>11737 Assignment 1: Low-resource Machine Translation</h1>
+    <p>In this assignment, you will train machine translation models for
+      a low-resource lanaguage (to English). You will complete three
+      models: </p>
+    <ol>
+      <li>Bilingual baseline model</li>
+      <li>Multlingual trained model</li>
+      <li>Finetuning pre-trained models</li>
+    </ol>
+    <h2 id="resources-and-gcp">Resources and GCP</h2>
+    <p>Having a GPU is not necessary but highly recommended. Google
+      Cloud provides for $300 free credits for new users. Instructions
+      on how to set it up can be found in <code>GCP.md</code>.
+      Additionally, please visit TA office hours if y'all still face
+      issues in setting this up.</p>
+    <h2 id="kaggle-leaderboard">Kaggle Leaderboard</h2>
+    <p>You are expected to upload your test predictions on this <a
+        href="https://www.kaggle.com/t/b2580bc99bd24082ac9518d0fbe62d7b">kaggle
+        leaderboard</a>. Instructions on how to do this can be found
+      below. You are expected to do this for each of the three baselines
+      (for a B, B+ and A- grade respectively; more details in the
+      grading section). Benchmark submissions for these have already
+      been made and you are expected to achieve similar values,
+      accounting for variance. Additional submissions with new methods
+      to improve performance are encouraged. Names for baseline
+      submissions are expected to be <code>&lt;andrew_id&gt;-bilingual</code>,
+      <code>&lt;andrew_id&gt;-multilingual</code>, and <code>&lt;andrew_id&gt;-flores</code>.
+      Additional submissions can be named <code>&lt;andrew_id&gt;-exp&lt;n&gt;</code>,
+      where <code>n</code> denotes the <code>nth</code> additional
+      submission.</p>
+    <h2 id="step-1-create-a-conda-environment-with-python310">Step 1:
+      Create a conda environment with python=3.10</h2>
+    <pre><code>conda create --name mnlp-assn1 python=3.10
+conda activate mnlp-assn1
+</code></pre>
+    <h2 id="step-2-install-the-required-packages">Step 2: Install the
+      required packages</h2>
+    <pre><code>pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
+pip install fairseq==0.12.2
+pip install unbabel-comet==2.0.2
+pip install sacremoses sentencepiece
+</code></pre>
+    <p>Additionally, one needs to clone the fairseq repo in their local
+      directory. This can be done as follows:</p>
+    <pre><code>git clone https://github.com/facebookresearch/fairseq.git
+</code></pre>
+    <h2 id="step-3-unzip-the-data">Step 3: Unzip the data</h2>
+    <pre><code>unzip data/assign1-data.zip
+rm -rf data/assign1-data.zip
+</code></pre>
+    <h2 id="bilingual-baselines">Bilingual Baselines</h2>
+    <p>As a first step, we will train NMT systems using only parallel
+      data from the language of interest. In this assignment, we will
+      consider one low-resource language: Belarusian (bel), translating
+      to English (eng).</p>
+    <p>We provide scripts for complete data processing, including simple
+      cleaning and (subword) tokenization as well as training and
+      evaluation. You should read the scripts to understand the data
+      processing pipeline, training and evaluation.</p>
+    <p>To perform preprocessing for the bel-eng parallel corpora, run:</p>
+    <pre><code>bash preprocess-ted-bilingual.sh
+</code></pre>
+    <p>Then, you can train and evaluate models on the preprocess data by
+      running:</p>
+    <pre><code>bash traineval_bel_eng.sh
+</code></pre>
+    <p>You should be able to reproduce the numbers below on the
+      validation set. To account for variance in experiments, a drop of
+      0.5 BLEU or 0.05 COMET are acceptable: </p>
+    <table border="1">
+      <thead> <tr>
+          <th><br>
+          </th>
+          <th>BLEU</th>
+          <th>COMET</th>
+        </tr>
+      </thead> <tbody>
+        <tr>
+          <td>bel-eng</td>
+          <td align="center">1.92</td>
+          <td align="center">-1.4185</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>With slight modifications in the script, you can obtain
+      predictions for the test set. These prediction files need to be
+      submitted to the kaggle leaderboard and can be converted to a CSV
+      format compatible for submission using the <code>convert_to_csv.py</code>
+      script. The benchmark submission for this baseline is titled <code>test-bilingual-prediction.csv</code>
+      on the leaderboard.&nbsp;Please name your submission <code>&lt;andrew_id&gt;-bilingual</code>.</p>
+    <h2 id="multilingual-training">Multilingual Training</h2>
+    <p>Note that since the languages we consider have very limited
+      amount of parallel training data, the NMT model performs really
+      badly, with BLEU scores of less than 10 and (very) negative COMET
+      scores. This is a known issue for neural models in general - they
+      are much more data-hungry than statistical methods. Luckily, we
+      can use multilingual training to boost the performance of these
+      low resource languages. In this section, you will learn to use
+      data from the high resource-related languages to improve the NMT
+      performance.</p>
+    <p>Crucially, for cross-lingual transfer to work, the high-resource
+      must be similar to the low-resource language we are transferring
+      to. For example, as mentioned in the first lecture, several
+      languages from North India (belonging to the Indo-aryan family)
+      share similarities with Hindi. Hence, if your target is one of
+      these languages, data from Hindi can positively transfer to the
+      target and improve its performance. This is more nuanced as
+      similarity can be across multiple axes like morphology, phonology,
+      syntax etc., and also depends on data quality. To train a model
+      multilingually, we simply need to concatenate the data from both
+      languages and train the model on this data. The idea is that the
+      knowledge learned about the source, can also help the model to
+      translate the target.</p>
+    <p>We provide scripts for training and evaluating a multilingual
+      model for Belarusian, trained also on Polish (pol). Note that
+      Polish is not necessarily the best transfer language for
+      Belarusian (this is just a sample, you can explore other languages
+      which can transfer better to Belarusian).</p>
+    <p>To start, run the following script to preprocess the data:</p>
+    <pre><code>bash preprocess-ted-multilingual.sh
+</code></pre>
+    <p>Then run training and evaluation to English.</p>
+    <pre><code>bash traineval_belpol_eng.sh
+</code></pre>
+    <p>You should be able to reproduce the numbers below on the
+      validation set. To account for variance in experiments, a drop of
+      0.5 BLEU or 0.05 COMET are acceptable: </p>
+    <table border="1" align="center">
+      <thead> <tr>
+          <th><br>
+          </th>
+          <th>BLEU</th>
+          <th>COMET</th>
+        </tr>
+      </thead> <tbody>
+        <tr>
+          <td>bel-eng</td>
+          <td align="center">16.11</td>
+          <td align="center">-0.3967</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>With slight modifications in the script, you can obtain
+      predictions for the test set. These prediction files need to be
+      submitted to the kaggle leaderboard and can be converted to a CSV
+      format compatible for submission using the <code>convert_to_csv.py</code>
+      script. The benchmark submission for this baseline is titled <code>test-multilingual-prediction.csv</code>
+      on the leaderboard. Please name your submission <code>&lt;andrew_id&gt;-multilingual</code>.</p>
+    <h2 id="finetuning-pretrained-multilingual-models">Finetuning
+      Pretrained Multilingual Models</h2>
+    <p>Another option to improve the performance is to leverage massive
+      multilingual pretrained models. These models were trained on
+      gigantic corpora with over 100 languages and have been shown to
+      improve performance on low-resource languages by extensively
+      leveraging cross-lingual transfer across the languages considered.</p>
+    <p>In this assignment, we will consider finetuning the small
+      FLORES-101 models on our low-resource languages.</p>
+    <p>To start, download the fairseq checkpoints for the model by
+      running:</p>
+    <pre><code>mkdir -p checkpoints &amp;&amp; cd checkpoints
+wget https://dl.fbaipublicfiles.com/flores101/pretrained_models/flores101_mm100_175M.tar.gz
+tar -xvf flores101_mm100_175M.tar.gz
+cd ..
+</code></pre>
+    <p>We provide scripts for preprocessing the data and finetuning the
+      model for bel.</p>
+    <p>Note that we need to run preprocessing again since we need to use
+      the original (subword) tokenization that the FLORES model was
+      trained with. To preprocess the data, run:</p>
+    <pre><code>bash preprocess-ted-flores-bilingual.sh
+</code></pre>
+    <p>You can then finetune the model and evaluate its translation to
+      English.</p>
+    <pre><code>bash traineval_flores_bel_eng.sh
+</code></pre>
+    <p>You should be able to reproduce the numbers below on the
+      validation set. To account for variance in experiments, a drop of
+      0.5 BLEU or 0.05 COMET are acceptable: </p>
+    <table border="1" align="center">
+      <thead> <tr>
+          <th align="center"><br>
+          </th>
+          <th>BLEU</th>
+          <th>COMET</th>
+        </tr>
+      </thead> <tbody>
+        <tr>
+          <td>bel-eng</td>
+          <td align="center">24.46</td>
+          <td align="center">0.0208</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>With slight modifications in the script, you can obtain
+      predictions for the test set. These prediction files need to be
+      submitted to the kaggle leaderboard and can be converted to a CSV
+      format compatible for submission using the <code>convert_to_csv.py</code>
+      script. The benchmark submission for this baseline is titled <code>test-flores-prediction.csv</code>
+      on the leaderboard. Please name your submission <code>&lt;andrew_id&gt;-flores</code>.</p>
+    <h2 id="improving-multilingual-training-and-transfer">Improving
+      Multilingual Training and Transfer</h2>
+    <h3 id="better-language-specific-architectures">Better
+      Language-specific Architectures</h3>
+    <p>There are many ways to improve the design of model architecture.
+      One key bottleneck for multlingual modelling is the language
+      interference in neural models. Yuan et al [1] develops a massive
+      multiway detachable model (LegoMT). Fan et al [2] and Costa-jussà
+      et al [3] uses mixture-of-expert models (MoE) for multilingual MT.
+      [4] introduce better training strategy for routing in experts. Lin
+      et al [5] develops multilingual MT models to alliviate the
+      interference explicity with learned langauge-specific sub-networks
+      (LaSS).</p>
+    <p>Adapter [6] [7] is a general method that introduces a new small
+      set of parameters to the model when finetuning, leaving the
+      original parameters fixed. Adapter finetuning has been shown to
+      improve the performance of multilingual models when finetuning in
+      new languages. Zhang et. [8] propose adding language-aware modules
+      in the NMT model.</p>
+    <h3 id="data-augmentation">Data Augmentation</h3>
+    <p>Extra monolingual data is often helpful for improving NMT
+      performance. Specifically, back-translation [9,10] has been widely
+      used to boost the performance of low-resource NMT. Creating
+      mix-coded data for multilingual training is particularly useful,
+      as in mRASP [11] and Xia et al. [12]. </p>
+    <h3 id="better-training-objectives">Better Training Objectives</h3>
+    <p>Pan et al [13] develops contrastive learning for multlingual
+      many-to-many translation (mRASP2). [14] adds a masked language
+      model objective for monolingual data while training a multilingual
+      model.</p>
+    <h3 id="using-pre-trained-language-models">Using Pre-trained
+      Language Models</h3>
+    <p>Yang et al [15] uses a pre-trained BERT model in machine
+      translation. Sun et al [16] combines a pre-trained multlingual
+      BERT and multlingual GPT together and obtains a stronger
+      mutlingual MT model. Liu et al [17] is another way to pre-train a
+      sequence-to-sequence model using raw data and further fine-tune on
+      mutlingual parallel data for translation. </p>
+    <h3 id="better-word-representation-or-tokenization">Better Word
+      Representation or Tokenization</h3>
+    <p>Vocabulary differences between the low-resource language and its
+      related high-resource language is an important bottleneck for
+      multilingual transfer. Xu et al [18] formulates the vocabulary
+      learning as an optimal transport problem. Wang et al [19] propose
+      a character-aware embedding method for multilingual training. For
+      morphological rich languages, such as Turkish and Azerbaijani, it
+      is also useful to use the morphology information in word
+      representations [20].</p>
+    <p>Recently, several approaches are proposed to improve the word
+      segmentation for standard NMT models [21], [22]. It is possible
+      that these improvements would be helpful for multilingual NMT as
+      well.</p>
+    <h3 id="choosing-transfer-languages">Choosing Transfer Languages</h3>
+    <p>For the provided multilingual training method, we simply use a
+      closely related high-resource language as a transfer language.
+      However, it is likely that data from other languages would be
+      helpful as well. Lin et al. [23] has done a systematic study of
+      choosing transfer languages for NLP tasks. </p>
+    <h3 id="efficient-finetuning">Efficient Finetuning</h3>
+    <p>Prefix-tuning [24] is an alternative finetuning paradigm that
+      adds a parametrized prefix to inputs (embeddings) to the model and
+      trains these prefixes, leaving the original model parameters
+      fixed. </p>
+    <h3 id="other-approaches">Other Approaches</h3>
+    <p>There are many potential directions for improving multilingual
+      training and finetuning. We encourage you to do more literature
+      research, and even come up with your own method!</p>
+    <h3 id="grading">Grading</h3>
+    <p>Write and submit a report (one-pager) describing and analyzing
+      the results. The style and format is flexible. It is expected for
+      you to be concise in describing what you tried and why, and how
+      the associated code can be run. </p>
+    <p><em>Basic Requirement</em>: Reproduce the results with the
+      bilingual baseline. To account for variance in experiments, a drop
+      of 0.5 BLEU or 0.05 COMET are acceptable. This will earn you a
+      passing B grade.</p>
+    <p><em>Multilingual Baseline</em>: Reproduce results with the
+      multilingual baseline. Try to think about why this improves
+      performance and whether other transfer languages can be used. To
+      account for variance in experiments, a drop of 0.5 BLEU or 0.05
+      COMET are acceptable. This will earn you a B+ grade. </p>
+    <p><em>Try pre-trained models</em>: Try to understand how
+      multilingual pre-training helps performance. Reproducing the
+      FLORES baseline and including why you get better performance using
+      this model in your write-up will earn you a A- grade.</p>
+    <p><em>Implement at least one pre-existing method to try to improve
+        multilingual transfer</em>: Compare the performance of the
+      implemented method with the baselines, clearly documenting results
+      and briefly analysing why it does or does not work. This will earn
+      you a A grade.</p>
+    <p><em>Implement several methods to improve multilingual transfer</em>:
+      For example, you can implement multiple pre-existing methods or
+      one pre-existing method and one novel method. Compare the
+      performance with the baselines, clearly documenting results and
+      briefly analysing why it does or does not work. This will earn you
+      a A+ for particularly extensive or interesting improvements and
+      analysis. If using existing code, please cite your sources.</p>
+    <h3 id="submission">Submission</h3>
+    <p>Your submission consists of three parts: <em>code</em>, <em>model
+        outputs</em> and <em>writeup</em>. Put all your code in a
+      folder named <code>code</code> and instructions on how to run if
+      you have implemented additional code. Include the output of your
+      models in an outputs directory, with a description of what model
+      each file is associated with. Rename the writeup as <code>writeup.pdf</code>
+      and compress all of them as <code>&lt;andrew_id&gt;-assn1.zip</code>.
+      This file must be submitted to Canvas.</p>
+    <p>References [1] Yuan et al. Lego-MT: Learning Detachable Models
+      for Massively Multilingual Machine Translation. ACL 2023. </p>
+    <p>[2] Fan et al. Beyond english-centric multilingual machine
+      translation. JMLR 2021.</p>
+    <p>[3] Costa-jussà et al. No language left behind: Scaling
+      human-centered machine translation. 2022.</p>
+    <p>[4]: StableMoE: Stable Routing Strategy for Mixture of Experts.
+      ACL 2022.</p>
+    <p>[5] Lin et al. Learning Language Specific Sub-network for
+      Multilingual Machine Translation. ACL 2021.</p>
+    <p>[6] Bapna and Firat. Simple, Scalable Adaptation for Neural
+      Machine Translation. EMNLP 2019.</p>
+    <p>[7] Zhu et al. Counter-Interference Adapter for Multilingual
+      Machine Translation. EMNLP 2021.</p>
+    <p>[8] Zhang et al. Improving massively multilingual neural machine
+      translation and zero-shot translation</p>
+    <p>[9]: Edunov et al. Understanding back-translation at scale.</p>
+    <p>[10]: Sennrich et al. Improving neural machine translation models
+      with monolingual data</p>
+    <p>[11]: Lin et al. Pre-training Multilingual Neural Machine
+      Translation by Leveraging Alignment Information, EMNLP 2020.</p>
+    <p>[12]: Xia et al. Generalized data augmentation for low-resource
+      translation, 2019.</p>
+    <p>[13] Pan et al. Contrastive Learning for Many-to-many
+      Multilingual Neural Machine Translation. ACL 2021. </p>
+    <p>[14]: Siddhant et al. Leveraging monolingual data with
+      self-supervision for multilingual neural machine translation.</p>
+    <p>[15] Yang et al. Towards Making the Most of BERT in Neural
+      Machine Translation. AAAI 2019.</p>
+    <p>[16] Sun et al. Multilingual Translation via Grafting Pre-trained
+      Language Models. EMNLP 2021</p>
+    <p>[17] Liu et al. Multilingual Denoising Pre-training for Neural
+      Machine Translation. 2020</p>
+    <p>[18] Xu et al. Vocabulary Learning via Optimal Transport for
+      Neural Machine Translation. ACL 2021.</p>
+    <p>[19] Wang et al. Multilingual neural machine translation with
+      soft decoupled encoding</p>
+    <p>[20] Chaudhary et al. Adapting word embeddings to new languages
+      with morphological and phonological subword</p>
+    <p>[21] Provilkov et al. BPE-dropout: Simple and effective subword
+      regularization</p>
+    <p>[22] He et al. Dynamic programming encoding for subword
+      segmentation in neural machine translation</p>
+    <p>[23] Lin et al. Choosing transfer languages for cross-lingual
+      learning.</p>
+    <p>[24]: Li et al. Prefix-Tuning: Optimizing Continuous Prompts for
+      Generation</p>
+  </body>
+</html>
