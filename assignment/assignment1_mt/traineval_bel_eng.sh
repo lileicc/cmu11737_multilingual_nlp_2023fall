@@ -27,13 +27,13 @@ fairseq-train \
 	--log-interval 20 2>&1 | tee $MODEL_DIR/train.log 
 
 fairseq-generate $BINARIZED_DATA \
-    --gen-subset test \
+    --gen-subset valid \
     --path $MODEL_DIR/checkpoint_best.pt \
     --batch-size 32 \
     --remove-bpe sentencepiece \
-    --beam 5 | grep ^H | cut -c 3- | sort -n | cut -f3- > "$MODEL_DIR"/test_b5.pred
+    --beam 5 | grep ^H | cut -c 3- | sort -n | cut -f3- > "$MODEL_DIR"/valid_b5.pred
 
-# echo "evaluating valid set"
-# python score.py "$MODEL_DIR"/valid_b5.pred "$RAW_DATA"/ted-dev.orig.eng \
-#     --src "$RAW_DATA"/ted-dev.orig.bel \
-#     | tee "$MODEL_DIR"/valid_b5.score
+echo "evaluating valid set"
+python score.py "$MODEL_DIR"/valid_b5.pred "$RAW_DATA"/ted-dev.orig.eng \
+    --src "$RAW_DATA"/ted-dev.orig.bel \
+    | tee "$MODEL_DIR"/valid_b5.score
