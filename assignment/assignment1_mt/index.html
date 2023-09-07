@@ -61,6 +61,10 @@ pip install sacremoses sentencepiece
       directory. This can be done as follows:</p>
     <pre><code>git clone https://github.com/facebookresearch/fairseq.git
 </code></pre>
+    <p>For the SEScore, one needs to clone the following repo and follow all the steps in the README:</p>
+    <pre><code>git clone https://github.com/xu1998hz/SEScore2.git</code></pre>
+    <p>Before running the scripts, one needs to download the model for EN from the drive link provided in the repo. 
+      You can find the weights at "weights > sescore2_en.ckpt"; and include it in the cloned "SEScore2" folder.</p>
     <h2 id="step-3-unzip-the-data">Step 3: Unzip the data</h2>
     <p> You may download data from canvas. <br>
     </p>
@@ -83,21 +87,22 @@ rm -rf data/assign1-data.zip
       running:</p>
     <pre><code>bash traineval_bel_eng.sh
 </code></pre>
-    <p>You should be able to reproduce the numbers below on the
-      validation set. To account for variance in experiments, a drop of
-      0.5 BLEU or 0.05 COMET are acceptable: </p>
+    <p>You should be able to reproduce the numbers below on the validation set. To account for variance in experiments, a drop of 0.5 BLEU, 0.05 COMET and 0.1 SEScore are acceptable. Normalized average is calculated as follows: average(BLEU*0.01 + COMET + (SEScore-25)/25): </p>
     <table border="1">
       <thead> <tr>
           <th><br>
           </th>
           <th>BLEU</th>
           <th>COMET</th>
+          <th>SEScore</th>
+          <th>Normalized average</th>
         </tr>
       </thead> <tbody>
         <tr>
           <td>bel-eng</td>
           <td align="center">1.92</td>
-          <td align="center">-1.4185</td>
+          <td align="center">0.3809</td>
+          <td align="center">-17.87</td>
         </tr>
       </tbody>
     </table>
@@ -141,21 +146,22 @@ rm -rf data/assign1-data.zip
     <p>Then run training and evaluation to English.</p>
     <pre><code>bash traineval_belpol_eng.sh
 </code></pre>
-    <p>You should be able to reproduce the numbers below on the
-      validation set. To account for variance in experiments, a drop of
-      0.5 BLEU or 0.05 COMET are acceptable: </p>
+    <p>You should be able to reproduce the numbers below on the validation set. To account for variance in experiments, a drop of 0.5 BLEU, 0.05 COMET and 0.1 SEScore are acceptable. Normalized average is calculated as follows: average(BLEU*0.01 + COMET + (SEScore-25)/25): </p>
     <table border="1" align="center">
       <thead> <tr>
           <th><br>
           </th>
           <th>BLEU</th>
           <th>COMET</th>
+          <th>SEScore</th>
         </tr>
       </thead> <tbody>
         <tr>
           <td>bel-eng</td>
           <td align="center">16.11</td>
-          <td align="center">-0.3967</td>
+          <td align="center">0.6312</td>
+          <td align="center">-9.38</td>
+          <td align="center">0.472</td>
         </tr>
       </tbody>
     </table>
@@ -192,21 +198,23 @@ cd ..
       English.</p>
     <pre><code>bash traineval_flores_bel_eng.sh
 </code></pre>
-    <p>You should be able to reproduce the numbers below on the
-      validation set. To account for variance in experiments, a drop of
-      0.5 BLEU or 0.05 COMET are acceptable: </p>
+    <p>You should be able to reproduce the numbers below on the validation set. To account for variance in experiments, a drop of 0.5 BLEU, 0.05 COMET and 0.1 SEScore are acceptable. Normalized average is calculated as follows: average(BLEU*0.01 + COMET + (SEScore-25)/25): </p>
     <table border="1" align="center">
       <thead> <tr>
           <th align="center"><br>
           </th>
           <th>BLEU</th>
           <th>COMET</th>
+          <th>SEScore</th>
+          <th>Normalized average</th>
         </tr>
       </thead> <tbody>
         <tr>
           <td>bel-eng</td>
           <td align="center">24.46</td>
-          <td align="center">0.0208</td>
+          <td align="center">0.7175</td>
+          <td align="center">-6.85</td>
+          <td align="center">0.563</td>
         </tr>
       </tbody>
     </table>
@@ -312,7 +320,11 @@ cd ..
       performance with the baselines, clearly documenting results and
       briefly analysing why it does or does not work. This will earn you
       a A+ for particularly extensive or interesting improvements and
-      analysis. If using existing code, please cite your sources.</p>
+      analysis. If using existing code, please cite your sources. 
+      Additionally, the top-5 submissions on the private kaggle leaderbaord 
+      will be awarded an A+ grade. The normalized average of all three scores 
+      (BLEU, COMET and SEScore) will be taken to achieve this. The
+      kaggle leaderboard only display the BLEU score. </p>
     <h3 id="submission">Submission</h3>
     <p>Your submission consists of three parts: <em>code</em>, <em>model
 
