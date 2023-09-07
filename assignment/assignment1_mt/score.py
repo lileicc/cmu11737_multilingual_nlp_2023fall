@@ -3,7 +3,7 @@ import numpy as np
 import sacrebleu
 from comet import download_model, load_from_checkpoint
 
-COMET_MODEL = "wmt20-comet-da"
+COMET_MODEL = "Unbabel/wmt22-comet-da"
 COMET_BATCH_SIZE = 64
 BLEURT_BATCH_SIZE = 64
 
